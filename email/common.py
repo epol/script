@@ -32,7 +32,7 @@ import urllib.request
 
 import datetime
 
-def send_mail(send_from, send_to, subject, text, files=None, reply_to=None, cc_to=None, bcc_to=None, server="localhost",date=None):
+def send_mail(send_from, send_to, subject, text, files=None, reply_to=None, cc_to=None, bcc_to=None, server="localhost",SSL=False,date=None):
     if files is None:
         files = []
     if reply_to is not None:
@@ -71,8 +71,10 @@ def send_mail(send_from, send_to, subject, text, files=None, reply_to=None, cc_t
             encoders.encode_base64(part)
             part.add_header('Content-Disposition', 'attachment; filename="%s"' % os.path.basename(f))
             msg.attach(part)
-
-    smtp = smtplib.SMTP(server)
+    if SSL:
+        smtp = smtplib.SMTP_SSL(server)
+    else:
+        smtp = smtplib.SMTP(server)
     smtp.sendmail(send_from, send_to+cc_to+bcc_to, msg.as_string())
     smtp.close()
 
