@@ -32,7 +32,7 @@ import urllib.request
 
 import datetime
 
-def send_mail(send_from, send_to, subject, text, files=None, reply_to=None, cc_to=None, bcc_to=None, server="localhost",SSL=False,date=None):
+def send_mail(send_from, send_to, subject, text, files=None, reply_to=None, cc_to=None, bcc_to=None, server="localhost",SSL=False,date=None,references=None,inreplyto=None):
     if files is None:
         files = []
     if reply_to is not None:
@@ -58,6 +58,10 @@ def send_mail(send_from, send_to, subject, text, files=None, reply_to=None, cc_t
         msg['Reply-To'] = COMMASPACE.join(reply_to)
     if date is not None:
         msg['Date'] = date.strftime("%a, %d %b %Y %H:%M:%S %z")
+    if references is not None:
+        msg['References'] = references
+    if inreplyto is not None:
+        msg['In-Reply-To'] = inreplyto
 
     msg.attach( MIMEText(text) )
 
