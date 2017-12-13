@@ -1,0 +1,11 @@
+---
+- hosts: all
+  connection: local
+  gather_facts: no
+  tasks:
+  - name: enable netconf
+    junos_netconf:
+      transport: cli
+      provider:
+        username: polesel
+      state: present
