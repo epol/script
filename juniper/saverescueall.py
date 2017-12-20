@@ -25,6 +25,8 @@
 # REQUIREMENTS:
 # - install Junos PyEZ:
 #   $ pip install junos-eznc
+# - install requests:
+#   $ pip install requests
 # - enable ssh netconf on the target switches:
 #   [configure] set system services netconf ssh
 
